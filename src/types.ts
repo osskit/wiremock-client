@@ -26,6 +26,7 @@ export interface RequestPattern {
   urlPathPattern?: string;
   method?: HttpMethod;
   queryParameters?: Record<string, any>;
+  bodyPatterns?: Record<string, any>[];
 }
 
 export interface ResponsePattern {
