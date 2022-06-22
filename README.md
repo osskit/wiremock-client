@@ -1,10 +1,11 @@
-<div align="center">
-
+<p align="center">
+<img width="300" height"200" src="https://user-images.githubusercontent.com/15312980/175097744-6f69f4a6-f11d-4b16-8857-225d0cdecffe.svg" />
+  
 # wiremock-client
 
 ## Useful common functions to easily use wiremock 
 
-</div>
+</p>
 
 ## Install
 ```
