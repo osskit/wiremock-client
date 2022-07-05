@@ -1,46 +1,59 @@
 {
   "name": "@osskit/wiremock-client",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/osskit/wiremock-client.git"
   },
-  "main": "dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
-    "lint": "eslint src --fix --ext .ts",
+    "lint:base": "eslint . --ext .ts",
+    "lint": "yarn lint:base --fix",
     "format": "prettier --write '**/*.{ts,js,json}'",
     "prepare": "husky install",
     "test": "yarn test:teardown && yarn test:setup && yarn test:start && yarn test:teardown",
-    "test:start": "jest --runInBand --forceExit --config tests/jest.config.ts",
+    "test:start": "NODE_OPTIONS=--experimental-vm-modules jest --config tests/jest.config.ts",
     "test:teardown": "cd tests && docker-compose down --remove-orphans",
     "test:setup": "yarn build && cd tests && docker-compose pull && docker-compose build && docker-compose up -d"
   },
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=18.0.0"
   },
   "dependencies": {
-    "p-wait-for": "^3.2.0",
+    "p-wait-for": "^4.1.0",
     "wiremock-rest-client": "^1.10.0"
   },
   "devDependencies": {
-    "@osskit/eslint-config": "^0.0.8",
+    "@osskit/eslint-config": "^1.0.5",
     "@osskit/prettier-config": "^0.0.1",
-    "@types/jest": "^27.4.0",
-    "@types/node-fetch": "^2.6.0",
-    "@typescript-eslint/eslint-plugin": "^5.12.0",
-    "eslint": "^8.9.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-jest": "^26.1.1",
-    "eslint-plugin-unicorn": "^40.1.0",
-    "husky": "^7.0.0",
-    "jest": "^27.5.1",
-    "lint-staged": "^12.3.4",
-    "prettier": "^2.5.1",
-    "ts-jest": "^27.1.3",
-    "ts-node": "^10.5.0",
-    "typescript": "^4.5.5"
+    "@osskit/tsconfig": "^0.0.5",
+    "@types/jest": "^28.1.4",
+    "@types/node-fetch": "^2.6.2",
+    "@typescript-eslint/eslint-plugin": "^5.30.5",
+    "@typescript-eslint/parser": "^5.30.5",
+    "eslint": "^8.19.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^26.5.3",
+    "eslint-plugin-unicorn": "^43.0.0",
+    "husky": "^8.0.1",
+    "jest": "^28.1.2",
+    "lint-staged": "^13.0.3",
+    "node-fetch": "^3.2.6",
+    "prettier": "^2.7.1",
+    "ts-jest": "^28.0.5",
+    "ts-node": "^10.8.2",
+    "typescript": "^4.7.4"
   },
   "lint-staged": {
     "*.ts": "eslint --fix",

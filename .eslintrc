@@ -1,6 +1,6 @@
 {
-  "extends": ["@osskit", "prettier"],
+  "extends": ["@osskit"],
   "ignorePatterns": [
-    "tests/**"
+    "dist/**"
   ]
 }
