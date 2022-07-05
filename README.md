@@ -60,22 +60,27 @@ const request = await createMapping({
 
 ### waitForCalls
 
-Return a promise to the calls that was made with the given request pattern. It waits to get the requests from 
+Return a promise to the calls that was made with the given request pattern, ordered by a given orderBy method 
+(optional).
+It waits to get the 
+requests from 
 wiremock with the given timeout and interval (async 
 method).
 
 
 Defaults:
-* options: { timeoutInMs: 3000, intervalInMs: 500 }
+* options: { timeoutOptions: { timeoutInMs: 3000, intervalInMs: 500 } }
+
 
 #### Usage
 ```ts
 const request = await createMapping({ request: { urlPathPattern: '/someUrl', method: HttpMethod.Post } });
 
-await fetch('http://localhost:8080/someUrl', { method: HttpMethod.Post, body: JSON.stringify(body) });
-await fetch('http://localhost:8080/someUrl', { method: HttpMethod.Post, body: JSON.stringify(body) });
+await fetch('http://localhost:8080/someUrl', { method: HttpMethod.Post, body: JSON.stringify(body1) });
+await fetch('http://localhost:8080/someUrl', { method: HttpMethod.Post, body: JSON.stringify(body2) });
 
-const calls = await waitForCalls(request, { timeoutInMs: 5000, intervalInMs: 1000 });
+const calls = await waitForCalls(request, { timeoutOptions: { timeoutInMs: 5000, intervalInMs: 1000 }, orderBy: (
+      {loggedDate: first}: Call, {loggedDate: second}: Call) => first - second});
 
 expect(calls).toHaveLength(2);
 expect(calls).toMatchSnapshot();
@@ -84,6 +89,9 @@ expect(calls).toMatchSnapshot();
 ### hasMadeCalls
 
 Returns a promise to a boolean representing if any calls with the given request pattern were made (async method).
+
+Defaults:
+* timeoutOptions: { timeoutInMs: 3000, intervalInMs: 500 }
 
 ### Usage
 ```ts
