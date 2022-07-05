@@ -90,13 +90,13 @@ describe('tests', () => {
 
       await fetch('http://localhost:8080/someUrl', {
         method: HttpMethod.Post,
-        body: JSON.stringify(firstBody),
+        body: JSON.stringify(secondBody),
         headers: { 'Content-Type': 'application/json' },
       });
 
       await fetch('http://localhost:8080/someUrl', {
         method: HttpMethod.Post,
-        body: JSON.stringify(secondBody),
+        body: JSON.stringify(firstBody),
         headers: { 'Content-Type': 'application/json' },
       });
 
