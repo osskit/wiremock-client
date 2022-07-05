@@ -1,5 +1,5 @@
 import { WireMockRestClient } from 'wiremock-rest-client';
-import type { Call, Configuration, Mapping, Request, RequestPattern, TimeoutOptions, HttpMethod } from './types';
+import type { Call, Configuration, Mapping, Request, RequestPattern, TimeoutOptions, HttpMethod, Options } from './types';
 import { LogLevel } from './types';
 import { waitForResults } from './waitForResults';
 
@@ -37,24 +37,31 @@ const parseBody = (body: string): Record<string, any> | string => {
   }
 };
 
-export const waitForCalls = async (request: RequestPattern, options?: TimeoutOptions): Promise<Call[]> => {
+export const waitForCalls = async (request: RequestPattern, options?: Options): Promise<Call[]> => {
   const requests = await waitForResults<Request>(async () => {
     const { requests } = await wireMock.requests.findRequests(request);
 
     return requests;
-  }, options);
+  }, options?.timeoutOptions);
 
-  return requests.map(({ url, method, body, headers, queryParams }) => ({
+  const calls: Call[] = requests.map(({ url, method, body, headers, queryParams, loggedDate }) => ({
     url,
     method: method as HttpMethod,
     headers,
     queryParams,
     body: parseBody(body),
+    loggedDate,
   }));
+
+  if (options?.orderBy) {
+    calls.sort(options.orderBy);
+  }
+
+  return calls;
 };
 
-export const hasMadeCalls = async (request: RequestPattern): Promise<boolean> => {
-  const calls = await waitForCalls(request);
+export const hasMadeCalls = async (request: RequestPattern, timeoutOptions?: TimeoutOptions): Promise<boolean> => {
+  const calls = await waitForCalls(request, { timeoutOptions });
 
   return !!calls.length;
 };

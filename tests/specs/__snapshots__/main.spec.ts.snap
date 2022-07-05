@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`tests returns mocked response as string on base64Body pattern 1`] = `"c29tZSBib2R5IG9uY2UgdG9sZCBtZQ=="`;
+exports[`tests createMapping returns mocked response as string on base64Body pattern 1`] = `"c29tZSBib2R5IG9uY2UgdG9sZCBtZQ=="`;
 
-exports[`tests returns mocked response as string on string body pattern 1`] = `"some body once told me"`;
+exports[`tests createMapping returns mocked response as string on string body pattern 1`] = `"some body once told me"`;
 
-exports[`tests waitForCalls get the calls information 1`] = `
+exports[`tests waitForCalls returns calls information for different request method to the same url 1`] = `
 Array [
   Object {
     "body": Object {
@@ -25,6 +25,92 @@ Array [
       "Host": "localhost:8080",
       "User-Agent": "node-fetch/1.0 (+https://github.com/bitinn/node-fetch)",
     },
+    "loggedDate": Any<Number>,
+    "method": "PUT",
+    "queryParams": Object {},
+    "url": "/someUrl",
+  },
+]
+`;
+
+exports[`tests waitForCalls returns calls information for different request method to the same url 2`] = `
+Array [
+  Object {
+    "body": Object {
+      "array": Array [
+        Object {
+          "field2": "value2",
+        },
+      ],
+      "field1": "value1",
+      "numberField": 1234,
+    },
+    "headers": Object {
+      "Accept": "*/*",
+      "Accept-Encoding": "gzip,deflate",
+      "Connection": "close",
+      "Content-Length": "68",
+      "Content-Type": "application/json",
+      "Host": "localhost:8080",
+      "User-Agent": "node-fetch/1.0 (+https://github.com/bitinn/node-fetch)",
+    },
+    "loggedDate": Any<Number>,
+    "method": "PUT",
+    "queryParams": Object {},
+    "url": "/someUrl",
+  },
+]
+`;
+
+exports[`tests waitForCalls returns calls information for get request 1`] = `
+Array [
+  Object {
+    "body": "",
+    "headers": Object {
+      "Accept": "*/*",
+      "Accept-Encoding": "gzip,deflate",
+      "Connection": "close",
+      "Content-Type": "application/json",
+      "Host": "localhost:8080",
+      "User-Agent": "node-fetch/1.0 (+https://github.com/bitinn/node-fetch)",
+    },
+    "loggedDate": Any<Number>,
+    "method": "GET",
+    "queryParams": Object {
+      "someQueryParam": Object {
+        "key": "someQueryParam",
+        "values": Array [
+          "someValue",
+        ],
+      },
+    },
+    "url": "/someUrl?someQueryParam=someValue",
+  },
+]
+`;
+
+exports[`tests waitForCalls returns calls information for post request 1`] = `
+Array [
+  Object {
+    "body": Object {
+      "array": Array [
+        Object {
+          "field2": "value2",
+        },
+      ],
+      "field1": "value1",
+      "numberField": 1234,
+    },
+    "headers": Object {
+      "Accept": "*/*",
+      "Accept-Encoding": "gzip,deflate",
+      "Connection": "close",
+      "Content-Length": "68",
+      "Content-Type": "application/json",
+      "Host": "localhost:8080",
+      "User-Agent": "node-fetch/1.0 (+https://github.com/bitinn/node-fetch)",
+    },
+    "loggedDate": Any<Number>,
     "method": "POST",
     "queryParams": Object {},
     "url": "/someUrl",
@@ -48,6 +134,7 @@ Array [
       "Host": "localhost:8080",
       "User-Agent": "node-fetch/1.0 (+https://github.com/bitinn/node-fetch)",
     },
+    "loggedDate": Any<Number>,
     "method": "POST",
     "queryParams": Object {},
     "url": "/someUrl",
@@ -55,13 +142,13 @@ Array [
 ]
 `;
 
-exports[`tests waitForCalls get the calls information for different request method to the same url 1`] = `
+exports[`tests waitForCalls returns ordered calls information 1`] = `
 Array [
   Object {
     "body": Object {
       "array": Array [
         Object {
-          "field2": "value2",
+          "field2": "someValue",
         },
       ],
       "field1": "value1",
@@ -71,68 +158,39 @@ Array [
       "Accept": "*/*",
       "Accept-Encoding": "gzip,deflate",
       "Connection": "close",
-      "Content-Length": "68",
+      "Content-Length": "71",
       "Content-Type": "application/json",
       "Host": "localhost:8080",
       "User-Agent": "node-fetch/1.0 (+https://github.com/bitinn/node-fetch)",
     },
-    "method": "PUT",
-    "queryParams": Object {},
-    "url": "/someUrl",
-  },
-]
-`;
-
-exports[`tests waitForCalls get the calls information for different request method to the same url 2`] = `
-Array [
-  Object {
-    "body": Object {
-      "array": Array [
-        Object {
-          "field2": "value2",
-        },
-      ],
-      "field1": "value1",
-      "numberField": 1234,
-    },
-    "headers": Object {
-      "Accept": "*/*",
-      "Accept-Encoding": "gzip,deflate",
-      "Connection": "close",
-      "Content-Length": "68",
-      "Content-Type": "application/json",
-      "Host": "localhost:8080",
-      "User-Agent": "node-fetch/1.0 (+https://github.com/bitinn/node-fetch)",
-    },
+    "loggedDate": Any<Number>,
     "method": "POST",
     "queryParams": Object {},
     "url": "/someUrl",
   },
-]
-`;
-
-exports[`tests waitForCalls get the calls information for get request 1`] = `
-Array [
   Object {
-    "body": "",
+    "body": Object {
+      "array": Array [
+        Object {
+          "field2": "someValue",
+        },
+      ],
+      "field1": "value1",
+      "numberField": 12345,
+    },
     "headers": Object {
       "Accept": "*/*",
       "Accept-Encoding": "gzip,deflate",
       "Connection": "close",
+      "Content-Length": "72",
       "Content-Type": "application/json",
       "Host": "localhost:8080",
       "User-Agent": "node-fetch/1.0 (+https://github.com/bitinn/node-fetch)",
     },
-    "method": "GET",
-    "queryParams": Object {
-      "someQueryParam": Object {
-        "key": "someQueryParam",
-        "values": Array [
-          "someValue",
-        ],
-      },
-    },
-    "url": "/someUrl?someQueryParam=someValue",
+    "loggedDate": Any<Number>,
+    "method": "POST",
+    "queryParams": Object {},
+    "url": "/someUrl",
   },
 ]
 `;

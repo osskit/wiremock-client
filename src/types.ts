@@ -42,12 +42,15 @@ export interface Mapping {
   response?: ResponsePattern;
 }
 
+export type Body = Record<string, any> | string;
+
 export interface Call {
   url: string;
   method: HttpMethod;
-  body: Record<string, any> | string;
+  body: Body;
   headers: Record<string, any>;
   queryParams: Record<string, any>;
+  loggedDate: number;
 }
 
 export interface Request {
@@ -56,9 +59,17 @@ export interface Request {
   queryParams: Record<string, any>;
   body: string;
   url: string;
+  loggedDate: number;
 }
 
 export interface TimeoutOptions {
   timeoutInMs: number;
   intervalInMs: number;
+}
+
+export type OrderBy = (a: Call, b: Call) => number;
+
+export interface Options {
+  timeoutOptions?: TimeoutOptions;
+  orderBy?: OrderBy;
 }
