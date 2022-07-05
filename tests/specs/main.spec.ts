@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
-import { createMapping, waitForCalls, hasMadeCalls, HttpMethod, LogLevel, reset, create, Call } from '../../dist';
+import type { Call } from '../../dist';
+import { createMapping, waitForCalls, hasMadeCalls, HttpMethod, LogLevel, reset, create } from '../../dist/index.js';
 
 interface Body {
   field1: string;
@@ -9,7 +10,7 @@ interface Body {
 
 const body = { field1: 'value1', numberField: 1234, array: [{ field2: 'value2' }] };
 const firstBody = { field1: 'value1', numberField: 1234, array: [{ field2: 'someValue' }] };
-const secondBody = { field1: 'value1', numberField: 12345, array: [{ field2: 'someValue' }] };
+const secondBody = { field1: 'value1', numberField: 12_345, array: [{ field2: 'someValue' }] };
 
 describe('tests', () => {
   beforeEach(async () => {
@@ -18,7 +19,7 @@ describe('tests', () => {
   });
 
   describe('create', () => {
-    it('creates a new client with different configuration ', async () => {
+    it('creates a new client with different configuration', async () => {
       create({ baseUrl: 'http://localhost:9090', logLevel: LogLevel.Warn, continueOnFailure: false });
       const request = await createMapping({ request: { urlPathPattern: '/someUrl', method: HttpMethod.Post } });
 
@@ -34,6 +35,7 @@ describe('tests', () => {
       await fetch('http://localhost:8080/someUrl', {
         method: HttpMethod.Post,
         body: JSON.stringify(body),
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         headers: { 'Content-Type': 'application/json' },
       });
       await fetch('http://localhost:8080/someUrl', { method: HttpMethod.Post, body: JSON.stringify(body) });
@@ -49,6 +51,7 @@ describe('tests', () => {
 
       await fetch('http://localhost:8080/someUrl?someQueryParam=someValue', {
         method: HttpMethod.Get,
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         headers: { 'Content-Type': 'application/json' },
       });
 
@@ -65,12 +68,14 @@ describe('tests', () => {
       await fetch('http://localhost:8080/someUrl', {
         method: HttpMethod.Post,
         body: JSON.stringify(body),
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         headers: { 'Content-Type': 'application/json' },
       });
 
       await fetch('http://localhost:8080/someUrl', {
         method: HttpMethod.Put,
         body: JSON.stringify(body),
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         headers: { 'Content-Type': 'application/json' },
       });
 
@@ -91,12 +96,14 @@ describe('tests', () => {
       await fetch('http://localhost:8080/someUrl', {
         method: HttpMethod.Post,
         body: JSON.stringify(secondBody),
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         headers: { 'Content-Type': 'application/json' },
       });
 
       await fetch('http://localhost:8080/someUrl', {
         method: HttpMethod.Post,
         body: JSON.stringify(firstBody),
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         headers: { 'Content-Type': 'application/json' },
       });
 
@@ -118,6 +125,7 @@ describe('tests', () => {
       const response = await fetch('http://localhost:8080/someUrl', {
         method: HttpMethod.Post,
         body: JSON.stringify(body),
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         headers: { 'Content-Type': 'application/json' },
       });
 
@@ -133,6 +141,7 @@ describe('tests', () => {
       const response = await fetch('http://localhost:8080/someUrl', {
         method: HttpMethod.Post,
         body: JSON.stringify(body),
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         headers: { 'Content-Type': 'application/json' },
       });
 

@@ -1,7 +1,7 @@
 import { WireMockRestClient } from 'wiremock-rest-client';
 import type { Call, Configuration, Mapping, Request, RequestPattern, TimeoutOptions, HttpMethod, Options } from './types';
-import { LogLevel } from './types';
-import { waitForResults } from './waitForResults';
+import { LogLevel } from './types.js';
+import { waitForResults } from './waitForResults.js';
 
 let wireMock = new WireMockRestClient('http://localhost:8080', {
   logLevel: 'error',
@@ -39,9 +39,9 @@ const parseBody = (body: string): Record<string, any> | string => {
 
 export const waitForCalls = async (request: RequestPattern, options?: Options): Promise<Call[]> => {
   const requests = await waitForResults<Request>(async () => {
-    const { requests } = await wireMock.requests.findRequests(request);
+    const { requests: wiremockRequest } = await wireMock.requests.findRequests(request);
 
-    return requests;
+    return wiremockRequest;
   }, options?.timeoutOptions);
 
   const calls: Call[] = requests.map(({ url, method, body, headers, queryParams, loggedDate }) => ({

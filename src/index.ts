@@ -1,2 +1,2 @@
-export * from './wiremock';
-export * from './types';
+export * from './wiremock.js';
+export * from './types.js';
