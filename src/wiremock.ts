@@ -1,21 +1,21 @@
 import { WireMockRestClient } from 'wiremock-rest-client';
-import type { JsonValue } from 'type-fest';
-import type { Call, Configuration, Mapping, Request, RequestPattern, TimeoutOptions, HttpMethod, Options } from './types';
-import { LogLevel } from './types.js';
+import type { Call, Configuration, Mapping, Request, RequestPattern, TimeoutOptions, HttpMethod, Options, OrderBy } from './types';
 import { waitForResults } from './waitForResults.js';
 
-const defaultConfiguration = {
+export const defaultConfiguration = {
   baseUrl: 'http://localhost:8080',
-  logLevel: LogLevel.Error,
 };
-let wireMock = new WireMockRestClient(defaultConfiguration.baseUrl, {
-  logLevel: defaultConfiguration.logLevel,
-});
 
-export const create = (configuration: Configuration) => {
-  const { logLevel, continueOnFailure, baseUrl } = { ...defaultConfiguration, ...configuration };
+const globalConfiguraiton: Configuration = defaultConfiguration;
 
-  wireMock = new WireMockRestClient(baseUrl, { logLevel, continueOnFailure });
+let wireMock = new WireMockRestClient(globalConfiguraiton.baseUrl);
+
+export const setGlobalConfiguration = ({ baseUrl }: Partial<Configuration>) => {
+  if (baseUrl) {
+    globalConfiguraiton.baseUrl = baseUrl;
+  }
+
+  wireMock = new WireMockRestClient(globalConfiguraiton.baseUrl);
 };
 
 export const reset = async (): Promise<void> => {
@@ -33,13 +33,13 @@ export const createMapping = async ({ request, response = { status: 200 } }: Map
 };
 
 interface WaitForCallsFunction {
-  (request: RequestPattern, options?: Options<true>): Promise<Call<string>[]>;
-  <Body extends JsonValue>(request: RequestPattern, options?: Options<false>): Promise<Call<Body>[]>;
+  <Body>(request: RequestPattern, options?: Options<Body, false>): Promise<Call<Body>[]>;
+  (request: RequestPattern, options?: Options<string, true>): Promise<Call<string>[]>;
 }
 
 export const waitForCalls: WaitForCallsFunction = async <Body, BodyAsString extends boolean>(
   request: RequestPattern,
-  options?: Options<BodyAsString>,
+  options?: Options<Body, BodyAsString>,
 ) => {
   const requests = await waitForResults<Request>(async () => {
     const { requests: wiremockRequest } = await wireMock.requests.findRequests(request);
@@ -52,12 +52,12 @@ export const waitForCalls: WaitForCallsFunction = async <Body, BodyAsString exte
     method: method as HttpMethod,
     headers,
     queryParams,
-    body: options?.bodyAsString ? body : (JSON.parse(body) as Body),
+    body: body && (options?.bodyAsString ? body : (JSON.parse(body) as Body)),
     loggedDate,
   }));
 
   if (options?.orderBy) {
-    calls.sort(options.orderBy);
+    calls.sort(options.orderBy as OrderBy<Body | string>);
   }
 
   return calls;

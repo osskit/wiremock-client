@@ -1,6 +1,4 @@
-import fetch from 'node-fetch';
-import type { Call } from '../../dist';
-import { createMapping, waitForCalls, hasMadeCalls, HttpMethod, LogLevel, reset, create } from '../../dist/index.js';
+import { createMapping, waitForCalls, hasMadeCalls, HttpMethod, reset, setGlobalConfiguration } from '../../src/index.js';
 
 interface Body {
   field1: string;
@@ -14,17 +12,17 @@ const secondBody = { field1: 'value1', numberField: 12_345, array: [{ field2: 's
 
 describe('tests', () => {
   beforeEach(async () => {
-    create();
+    setGlobalConfiguration({});
     await reset();
   });
 
-  describe('create', () => {
-    it('creates a new client with different configuration', async () => {
-      create({ baseUrl: 'http://localhost:9090', logLevel: LogLevel.Warn, continueOnFailure: false });
+  describe('setGlobalConfiguration', () => {
+    it('replaces the global configuration', async () => {
+      setGlobalConfiguration({ baseUrl: 'http://localhost:9090' });
       const request = await createMapping({ request: { urlPathPattern: '/someUrl', method: HttpMethod.Post } });
 
       await fetch('http://localhost:9090/someUrl', { method: HttpMethod.Post, body: JSON.stringify(body) });
-      expect(await hasMadeCalls(request)).toBeTruthy();
+      await expect(hasMadeCalls(request)).resolves.toBeTruthy();
     });
   });
 
@@ -51,8 +49,6 @@ describe('tests', () => {
 
       await fetch('http://localhost:8080/someUrl?someQueryParam=someValue', {
         method: HttpMethod.Get,
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        headers: { 'Content-Type': 'application/json' },
       });
 
       const calls = await waitForCalls(request);
@@ -107,11 +103,24 @@ describe('tests', () => {
         headers: { 'Content-Type': 'application/json' },
       });
 
-      const calls = await waitForCalls(request, {
-        orderBy: (a: Call, b: Call) => (a.body as Body).numberField - (b.body as Body).numberField,
+      const calls = await waitForCalls<Body>(request, {
+        orderBy: (a, b) => a.body.numberField - b.body.numberField,
       });
 
       expect(calls).toMatchSnapshot([{ loggedDate: expect.any(Number) }, { loggedDate: expect.any(Number) }]);
+    });
+
+    it('returns bodyAsString', async () => {
+      const request = await createMapping({ request: { urlPathPattern: '/someUrl', method: HttpMethod.Post } });
+
+      await fetch('http://localhost:8080/someUrl', {
+        method: HttpMethod.Post,
+        body: 'yay',
+      });
+
+      const calls = await waitForCalls(request, { bodyAsString: true });
+
+      expect(calls).toMatchSnapshot([{ loggedDate: expect.any(Number) }]);
     });
   });
 
@@ -158,7 +167,7 @@ describe('tests', () => {
 
       await fetch('http://localhost:8080/someUrl', { method: HttpMethod.Put, body: JSON.stringify(body) });
 
-      expect(await hasMadeCalls(request)).toBeTruthy();
+      await expect(hasMadeCalls(request)).resolves.toBeTruthy();
     });
 
     it('returns false if calls were not made', async () => {
@@ -167,7 +176,7 @@ describe('tests', () => {
         response: { status: 204, jsonBody: [{ returnValue: 'someReturnValue' }] },
       });
 
-      expect(await hasMadeCalls(request)).toBeFalsy();
+      await expect(hasMadeCalls(request)).resolves.toBeFalsy();
     });
   });
 });
