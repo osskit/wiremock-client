@@ -10,7 +10,7 @@
 </div>
 
 ## Install
-```
+```sh
 yarn add @osskit/wiremock-client
 ```
 
@@ -53,9 +53,9 @@ Defaults:
 #### Usage
 ```ts
 const request = await createMapping({
-      request: { urlPathPattern: '/someUrl', method: HttpMethod.Put },
-      response: { status: 204, jsonBody: [{ returnValue: 'someReturnValue' }] },
-    });
+  request: { urlPathPattern: '/someUrl', method: HttpMethod.Put },
+  response: { status: 204, jsonBody: [{ returnValue: 'someReturnValue' }] },
+});
 ```
 
 ### waitForCalls
@@ -96,9 +96,9 @@ Defaults:
 ### Usage
 ```ts
 const request = await createMapping({
-      request: { urlPathPattern: '/someUrl', method: HttpMethod.Post },
-      response: { status: 204, jsonBody: [{ returnValue: 'someReturnValue' }] },
-    });
+  request: { urlPathPattern: '/someUrl', method: HttpMethod.Post },
+  response: { status: 204, jsonBody: [{ returnValue: 'someReturnValue' }] },
+});
 
 expect(await hasMadeCalls(request)).toBeFalsy();
 ```

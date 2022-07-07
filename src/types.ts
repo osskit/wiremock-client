@@ -1,3 +1,5 @@
+import type { JsonValue } from 'type-fest';
+
 export enum LogLevel {
   Trace = 'trace',
   Debug = 'debug',
@@ -16,8 +18,8 @@ export enum HttpMethod {
 }
 
 export interface Configuration {
-  baseUrl: string;
-  logLevel: LogLevel;
+  baseUrl?: string;
+  logLevel?: LogLevel;
   continueOnFailure?: boolean;
 }
 
@@ -42,9 +44,7 @@ export interface Mapping {
   response?: ResponsePattern;
 }
 
-export type Body = Record<string, any> | string;
-
-export interface Call {
+export interface Call<Body extends JsonValue> {
   url: string;
   method: HttpMethod;
   body: Body;
@@ -67,9 +67,10 @@ export interface TimeoutOptions {
   intervalInMs: number;
 }
 
-export type OrderBy = (a: Call, b: Call) => number;
+export type OrderBy = <Body extends JsonValue>(a: Call<Body>, b: Call<Body>) => number;
 
-export interface Options {
+export interface Options<BodyAsString> {
   timeoutOptions?: TimeoutOptions;
   orderBy?: OrderBy;
+  bodyAsString?: BodyAsString;
 }
