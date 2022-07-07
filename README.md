@@ -51,14 +51,14 @@ describe('tests', () => {
 
 ## API
 
-### setGlobalConfiguration(options)
+### setGlobalConfiguration(configuration)
 
 Overrides the global configuration for the wiremock client.
 Usually called once at the start of the tests.
 
-#### options
+#### configuration
 
-Type: `object`
+Type: `Configuration`
 
 ##### baseUrl?
 
@@ -80,7 +80,7 @@ Returns a `Promise` to the request, so it can later be used to get the calls or 
 
 #### mapping
 
-Type: `object`
+Type: `Mapping`
 
 ##### request
 
@@ -151,7 +151,7 @@ Type: `RequestPattern`
 
 #### options
 
-Type: `object`
+Type: `Options`
 
 ##### timeoutOptions
 
