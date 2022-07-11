@@ -1,12 +1,3 @@
-export enum LogLevel {
-  Trace = 'trace',
-  Debug = 'debug',
-  Info = 'info',
-  Warn = 'warn',
-  Error = 'error',
-  Silent = 'silent',
-}
-
 export enum HttpMethod {
   Get = 'GET',
   Put = 'PUT',
@@ -17,8 +8,6 @@ export enum HttpMethod {
 
 export interface Configuration {
   baseUrl: string;
-  logLevel: LogLevel;
-  continueOnFailure?: boolean;
 }
 
 export interface RequestPattern {
@@ -29,7 +18,7 @@ export interface RequestPattern {
   bodyPatterns?: Record<string, any>[];
 }
 
-export interface ResponsePattern {
+export interface Response {
   status: number;
   jsonBody?: Record<string, any>;
   headers?: Record<string, any>;
@@ -39,12 +28,10 @@ export interface ResponsePattern {
 
 export interface Mapping {
   request: RequestPattern;
-  response?: ResponsePattern;
+  response?: Response;
 }
 
-export type Body = Record<string, any> | string;
-
-export interface Call {
+export interface Call<Body> {
   url: string;
   method: HttpMethod;
   body: Body;
@@ -67,9 +54,10 @@ export interface TimeoutOptions {
   intervalInMs: number;
 }
 
-export type OrderBy = (a: Call, b: Call) => number;
+export type OrderBy<Body> = (a: Call<Body>, b: Call<Body>) => number;
 
-export interface Options {
+export interface Options<Body, BodyAsString extends boolean> {
   timeoutOptions?: TimeoutOptions;
-  orderBy?: OrderBy;
+  orderBy?: OrderBy<Body>;
+  bodyAsString?: BodyAsString;
 }

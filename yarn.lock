@@ -793,32 +793,25 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@osskit/eslint-config@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@osskit/eslint-config/-/eslint-config-1.0.5.tgz#2167f489f04219fcd627dfe1f70993fc2e8459b6"
-  integrity sha512-ckti292Lz/78YUJ1wtTN9JndNaGpa/d61ilurCi0UCrPJfpDU7Hm5YgYf8HwPGWUnVELvIiY97nW/cUbe9RRAQ==
+"@osskit/eslint-config@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@osskit/eslint-config/-/eslint-config-1.0.7.tgz#9c810fdb2cb2a9f401aabcd55c3d6e53f8c68811"
+  integrity sha512-Yh/cS0ORGtbkLWG4/mXkgvlXhOSi9rZuo+y5DfOtk26iPeOCryzjFTa8zv2odJu8+l+8hCM5VEph/WPIDkZWUw==
 
 "@osskit/prettier-config@^0.0.1":
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/@osskit/prettier-config/-/prettier-config-0.0.1.tgz#f3e7751e694c53b9f376dd78e01fd4d94536261b"
   integrity sha512-kmu9L9TDczSG4TvVDMveZ/6oi2GtzZa2Oyw8zoup9F/SHNXiszjAhuTcZeCggA1XaoFanr9Wa4xopa/PGoV89g==
 
-"@osskit/tsconfig@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@osskit/tsconfig/-/tsconfig-0.0.5.tgz#25e6348175fed4e0a788c8e6ffdd5057ce1bd43d"
-  integrity sha512-nf9ShYw2l7a18987lcM0JdvWRk+yaiKMB/dzpz6FJTYPAx3Wly925pVIQppcPyv6bgcKSkXXYEKSK2pejipaEA==
-  dependencies:
-    "@sindresorhus/tsconfig" "^3.0.1"
+"@osskit/tsconfig@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@osskit/tsconfig/-/tsconfig-0.0.6.tgz#9d5ade8a42289fdf2f9b53fc50f1104e97b0ef3b"
+  integrity sha512-J6aNh0Jr17S/06r/6QkVJ34QIHS768qnT4zcDedJRXzsjVeQAbnh3LVDwaWyWK75YlFSBK5ef1FYjXroIFt+KA==
 
 "@sinclair/typebox@^0.23.3":
   version "0.23.5"
   resolved "https://registry.yarnpkg.com/@sinclair/typebox/-/typebox-0.23.5.tgz#93f7b9f4e3285a7a9ade7557d9a8d36809cbc47d"
   integrity sha512-AFBVi/iT4g20DHoujvMH1aEDn8fGJh4xsRGCP6d8RpLPMqsNPvW01Jcn0QysXTsg++/xj25NmJsGyH9xug/wKg==
-
-"@sindresorhus/tsconfig@^3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@sindresorhus/tsconfig/-/tsconfig-3.0.1.tgz#e2eaebda42aa7a755b11bdfbea847446652e1ac4"
-  integrity sha512-0/gtPNTY3++0J2BZM5nHHULg0BIMw886gqdn8vWN+Av6bgF5ZU2qIcHubAn+Z9KNvJhO8WFE+9kDOU3n6OcKtA==
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.3"
@@ -1555,11 +1548,6 @@ cross-spawn@^7.0.2, cross-spawn@^7.0.3:
     shebang-command "^2.0.0"
     which "^2.0.1"
 
-data-uri-to-buffer@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/data-uri-to-buffer/-/data-uri-to-buffer-4.0.0.tgz#b5db46aea50f6176428ac05b73be39a57701a64b"
-  integrity sha512-Vr3mLBA8qWmcuschSLAOogKgQ/Jwxulv3RNE4FXnYWRGujzrRWQI4m12fQqRkwX06C0KanhLr4hK+GydchZsaA==
-
 debug@4, debug@^4.1.0, debug@^4.1.1, debug@^4.3.2, debug@^4.3.4:
   version "4.3.4"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.4.tgz#1319f6579357f2338d3337d2cdd4914bb5dcc865"
@@ -1784,10 +1772,10 @@ eslint-plugin-jest@^26.5.3:
   dependencies:
     "@typescript-eslint/utils" "^5.10.0"
 
-eslint-plugin-unicorn@^43.0.0:
-  version "43.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-unicorn/-/eslint-plugin-unicorn-43.0.0.tgz#c26fdfd146036b3f7951fa0f8c9af2b81bd87096"
-  integrity sha512-Z/6HX8yry+zAjo4jHHTAbe1rfniox7qgmCReGBfTc/CVgotfScaMCc4dtSSTHlJ+7Yix5o6LPXzwwpuGGFricg==
+eslint-plugin-unicorn@^43.0.1:
+  version "43.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-unicorn/-/eslint-plugin-unicorn-43.0.1.tgz#71c79caa95dde626c1cd285540fbccaafc262511"
+  integrity sha512-wYvF6q0RRTKw6gzbKy5bbazWUrBEPIto2S9U6eSF+tsHgtgE+CwQ6Bww1W2Ie9TRED01QkZRN79c5aVMFgrFYw==
   dependencies:
     "@babel/helper-validator-identifier" "^7.18.6"
     ci-info "^3.3.2"
@@ -2007,14 +1995,6 @@ fb-watchman@^2.0.0:
   dependencies:
     bser "2.1.1"
 
-fetch-blob@^3.1.2, fetch-blob@^3.1.4:
-  version "3.1.5"
-  resolved "https://registry.yarnpkg.com/fetch-blob/-/fetch-blob-3.1.5.tgz#0077bf5f3fcdbd9d75a0b5362f77dbb743489863"
-  integrity sha512-N64ZpKqoLejlrwkIAnb9iLSA3Vx/kjgzpcDhygcqJ2KKjky8nCgUQ+dzXtbrLaWZGZNmNfQTsiQ0weZ1svglHg==
-  dependencies:
-    node-domexception "^1.0.0"
-    web-streams-polyfill "^3.0.3"
-
 file-entry-cache@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/file-entry-cache/-/file-entry-cache-6.0.1.tgz#211b2dd9659cb0394b073e7323ac3c933d522027"
@@ -2065,13 +2045,6 @@ form-data@^3.0.0:
     asynckit "^0.4.0"
     combined-stream "^1.0.8"
     mime-types "^2.1.12"
-
-formdata-polyfill@^4.0.10:
-  version "4.0.10"
-  resolved "https://registry.yarnpkg.com/formdata-polyfill/-/formdata-polyfill-4.0.10.tgz#24807c31c9d402e002ab3d8c720144ceb8848423"
-  integrity sha512-buewHzMvYL29jdeQTVILecSaZKnt/RJWjoZCF5OW60Z67/GmSLBkOFM7qh1PI3zFNtJbaZL5eQu1vLfazOwj4g==
-  dependencies:
-    fetch-blob "^3.1.2"
 
 fs.realpath@^1.0.0:
   version "1.0.0"
@@ -3134,26 +3107,12 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
 
-node-domexception@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/node-domexception/-/node-domexception-1.0.0.tgz#6888db46a1f71c0b76b3f7555016b63fe64766e5"
-  integrity sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==
-
 node-fetch@2.6.7:
   version "2.6.7"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.7.tgz#24de9fba827e3b4ae44dc8b20256a379160052ad"
   integrity sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==
   dependencies:
     whatwg-url "^5.0.0"
-
-node-fetch@^3.2.6:
-  version "3.2.6"
-  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-3.2.6.tgz#6d4627181697a9d9674aae0d61548e0d629b31b9"
-  integrity sha512-LAy/HZnLADOVkVPubaxHDft29booGglPFDr2Hw0J1AercRh01UiVFm++KMDnJeH9sHgNB4hsXPii7Sgym/sTbw==
-  dependencies:
-    data-uri-to-buffer "^4.0.0"
-    fetch-blob "^3.1.4"
-    formdata-polyfill "^4.0.10"
 
 node-int64@^0.4.0:
   version "0.4.0"
@@ -4030,11 +3989,6 @@ walker@^1.0.8:
   integrity sha512-ts/8E8l5b7kY0vlWLewOkDXMmPdLcVV4GmOQLyxuSswIJsweeFZtAsMF7k1Nszz+TYBQrlYRmzOnr398y1JemQ==
   dependencies:
     makeerror "1.0.12"
-
-web-streams-polyfill@^3.0.3:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/web-streams-polyfill/-/web-streams-polyfill-3.2.1.tgz#71c2718c52b45fd49dbeee88634b3a60ceab42a6"
-  integrity sha512-e0MO3wdXWKrLbL0DgGnUV7WHVuw9OUvL4hjgnPkIeEvESk74gAITi5G606JtZPp39cd8HA9VQzCIvA49LpPN5Q==
 
 webidl-conversions@^3.0.0:
   version "3.0.1"

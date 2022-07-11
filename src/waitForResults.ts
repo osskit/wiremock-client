@@ -3,9 +3,7 @@ import type { TimeoutOptions } from './types';
 
 export const waitForResults = async <T>(getResults: () => Promise<T[]>, options?: TimeoutOptions): Promise<T[]> => {
   const { timeoutInMs, intervalInMs } = { timeoutInMs: 3000, intervalInMs: 500, ...options };
-  let results: T[] = [];
-
-  results = await getResults();
+  let results: T[] = await getResults();
 
   if (results.length) {
     return results;
