@@ -1,4 +1,12 @@
-import { createMapping, waitForCalls, hasMadeCalls, HttpMethod, reset, setGlobalConfiguration } from '../../src/index.js';
+import {
+  createMapping,
+  waitForCalls,
+  hasMadeCalls,
+  HttpMethod,
+  reset,
+  setGlobalConfiguration,
+  defaultConfiguration,
+} from '../../src/index.js';
 
 interface Body {
   field1: string;
@@ -12,7 +20,7 @@ const secondBody = { field1: 'value1', numberField: 12_345, array: [{ field2: 's
 
 describe('tests', () => {
   beforeEach(async () => {
-    setGlobalConfiguration({});
+    setGlobalConfiguration(defaultConfiguration);
     await reset();
   });
 

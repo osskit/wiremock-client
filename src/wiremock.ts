@@ -2,11 +2,11 @@ import { WireMockRestClient } from 'wiremock-rest-client';
 import type { Call, Configuration, Mapping, Request, RequestPattern, TimeoutOptions, HttpMethod, Options, OrderBy } from './types';
 import { waitForResults } from './waitForResults.js';
 
-export const defaultConfiguration = {
+export const defaultConfiguration: Readonly<Configuration> = {
   baseUrl: 'http://localhost:8080',
 };
 
-const globalConfiguraiton: Configuration = defaultConfiguration;
+const globalConfiguraiton: Configuration = { ...defaultConfiguration };
 
 let wireMock = new WireMockRestClient(globalConfiguraiton.baseUrl, { logLevel: 'ERROR' });
 
