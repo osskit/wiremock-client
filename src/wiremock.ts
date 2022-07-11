@@ -8,14 +8,14 @@ export const defaultConfiguration = {
 
 const globalConfiguraiton: Configuration = defaultConfiguration;
 
-let wireMock = new WireMockRestClient(globalConfiguraiton.baseUrl);
+let wireMock = new WireMockRestClient(globalConfiguraiton.baseUrl, { logLevel: 'ERROR' });
 
 export const setGlobalConfiguration = ({ baseUrl }: Partial<Configuration>) => {
   if (baseUrl) {
     globalConfiguraiton.baseUrl = baseUrl;
   }
 
-  wireMock = new WireMockRestClient(globalConfiguraiton.baseUrl);
+  wireMock = new WireMockRestClient(globalConfiguraiton.baseUrl, { logLevel: 'ERROR' });
 };
 
 export const reset = async (): Promise<void> => {
