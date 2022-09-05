@@ -16,6 +16,7 @@ export interface RequestPattern {
   method?: HttpMethod;
   queryParameters?: Record<string, any>;
   bodyPatterns?: Record<string, any>[];
+  headers?: Record<string, any>;
 }
 
 export interface Response {
