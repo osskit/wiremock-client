@@ -18,35 +18,72 @@ yarn add --dev @osskit/wiremock-client
 
 ## Usage
 
+### basic usage
 ```ts
 import { setGlobalConfiguration, reset, createMapping, hasMadeCalls, waitForCalls } from '@osskit/wiremock-client';
 
 setGlobalConfiguration({ baseUrl: 'http://localhost:9090' });
 
 describe('tests', () => {
-  beforeEach(async () => {
-    await reset();
-  });
+    beforeEach(async () => {
+        await reset();
+    });
 
-  // check if a call has been made
-  it('hasMadeCalls', async () => {
-    const request = await createMapping({ request: { urlPathPattern: '/someUrl', method: HttpMethod.Post } });
+    // check if a call has been made
+    it('hasMadeCalls', async () => {
+        const request = await createMapping({request: {urlPathPattern: '/someUrl', method: HttpMethod.Post}});
 
-    await fetch('http://localhost:9090/someUrl', { method: HttpMethod.Post, body: "{}" });
-    await expect(hasMadeCalls(request)).resolves.toBeTruthy();
-  });
+        await fetch('http://localhost:9090/someUrl', {method: HttpMethod.Post, body: "{}"});
+        await expect(hasMadeCalls(request)).resolves.toBeTruthy();
+    });
 
-  // validate the calls that has been made
-  it('waitForCalls', async () => {
-    const request = await createMapping({ request: { urlPathPattern: '/someUrl', method: HttpMethod.Post } });
+    // validate the calls that has been made
+    it('waitForCalls', async () => {
+        const request = await createMapping({request: {urlPathPattern: '/someUrl', method: HttpMethod.Post}});
 
-    await fetch('http://localhost:9090/someUrl', { method: HttpMethod.Post, body: "{}" });
+        await fetch('http://localhost:9090/someUrl', {method: HttpMethod.Post, body: "{}"});
 
-    const calls = await waitForCalls(request);
+        const calls = await waitForCalls(request);
 
-    expect(calls).toHaveLength(1);
-    expect(calls[0]).toHaveProperty('body', {});
-  });
+        expect(calls).toHaveLength(1);
+        expect(calls[0]).toHaveProperty('body', {});
+    });
+});
+```
+### creating multiple clients
+useful for parallel tests
+```ts
+import { WireMockClient } from '@osskit/wiremock-client';
+
+const client = new WireMockClient('http://localhost:9090');
+const client2 = new WireMockClient('http://localhost:8080');
+
+describe('tests', () => {
+    beforeEach(async () => {
+        await client.reset();
+        await client2.reset();
+    });
+
+    // check if a call has been made
+    it('hasMadeCalls', async () => {
+        const request = await client.createMapping({request: {urlPathPattern: '/someUrl', method: HttpMethod.Post}});
+
+        await fetch('http://localhost:9090/someUrl', {method: HttpMethod.Post, body: "{}"});
+        await expect(client.hasMadeCalls(request)).resolves.toBeTruthy();
+    });
+
+    // validate the calls that has been made
+    it('waitForCalls', async () => {
+        const request = await client2.createMapping({request: {urlPathPattern: '/someUrl', method: HttpMethod.Post}});
+
+        await fetch('http://localhost:8080/someUrl', {method: HttpMethod.Post, body: "{}"});
+
+        const calls = await client2.waitForCalls(request);
+
+        expect(calls).toHaveLength(1);
+        expect(calls[0]).toHaveProperty('body', {});
+    });
+});
 ```
 
 ## API

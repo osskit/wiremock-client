@@ -1,70 +1,26 @@
-import { WireMockRestClient } from 'wiremock-rest-client';
-import type { Call, Configuration, Mapping, Request, RequestPattern, TimeoutOptions, HttpMethod, Options, OrderBy } from './types';
-import { waitForResults } from './waitForResults.js';
+import type { Configuration, Mapping, RequestPattern, TimeoutOptions, Options, WaitForCallsFunction } from './types';
+import { WireMockClient } from './wireMockClient.js';
 
 export const defaultConfiguration: Readonly<Configuration> = {
   baseUrl: 'http://localhost:8080',
 };
 
-const globalConfiguraiton: Configuration = { ...defaultConfiguration };
-
-let wireMock = new WireMockRestClient(globalConfiguraiton.baseUrl, { logLevel: 'ERROR' });
+let wireMockClient = new WireMockClient();
 
 export const setGlobalConfiguration = ({ baseUrl }: Partial<Configuration>) => {
-  if (baseUrl) {
-    globalConfiguraiton.baseUrl = baseUrl;
-  }
-
-  wireMock = new WireMockRestClient(globalConfiguraiton.baseUrl, { logLevel: 'ERROR' });
+  wireMockClient = new WireMockClient(baseUrl);
 };
 
 export const reset = async (): Promise<void> => {
-  await wireMock.global.resetAll();
+  await wireMockClient.reset();
 };
 
-export const createMapping = async ({ request, response = { status: 200 } }: Mapping): Promise<RequestPattern> => {
-  const stubMapping = await wireMock.mappings.createMapping({ request, response });
-
-  if (!stubMapping.request) {
-    throw new Error(`Failed to create mapping - ${JSON.stringify(stubMapping)}`);
-  }
-
-  return { ...stubMapping.request, method: stubMapping.request.method as HttpMethod };
-};
-
-interface WaitForCallsFunction {
-  <Body>(request: RequestPattern, options?: Options<Body, false>): Promise<Call<Body>[]>;
-  (request: RequestPattern, options?: Options<string, true>): Promise<Call<string>[]>;
-}
+export const createMapping = (mapping: Mapping): Promise<RequestPattern> => wireMockClient.createMapping(mapping);
 
 export const waitForCalls: WaitForCallsFunction = async <Body, BodyAsString extends boolean>(
   request: RequestPattern,
   options?: Options<Body, BodyAsString>,
-) => {
-  const requests = await waitForResults<Request>(async () => {
-    const { requests: wiremockRequest } = await wireMock.requests.findRequests(request);
+) => wireMockClient.waitForCalls(request, options);
 
-    return wiremockRequest;
-  }, options?.timeoutOptions);
-
-  const calls = requests.map(({ url, method, body, headers, queryParams, loggedDate }) => ({
-    url,
-    method: method as HttpMethod,
-    headers,
-    queryParams,
-    body: body && (options?.bodyAsString ? body : (JSON.parse(body) as Body)),
-    loggedDate,
-  }));
-
-  if (options?.orderBy) {
-    calls.sort(options.orderBy as OrderBy<Body | string>);
-  }
-
-  return calls;
-};
-
-export const hasMadeCalls = async (request: RequestPattern, timeoutOptions?: TimeoutOptions): Promise<boolean> => {
-  const calls = await waitForCalls(request, { timeoutOptions });
-
-  return !!calls.length;
-};
+export const hasMadeCalls = (request: RequestPattern, timeoutOptions?: TimeoutOptions): Promise<boolean> =>
+  wireMockClient.hasMadeCalls(request, timeoutOptions);

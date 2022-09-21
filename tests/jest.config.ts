@@ -2,13 +2,20 @@ import type { InitialOptionsTsJest } from 'ts-jest';
 
 const config: InitialOptionsTsJest = {
   preset: 'ts-jest/presets/default-esm',
-  rootDir: '../',
-  testMatch: ['<rootDir>/tests/specs/*.spec.ts'],
-  globals: {
+  testEnvironment: 'node',
+  extensionsToTreatAsEsm: ['.ts'],
+  transform: {
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    'ts-jest': {
-      useESM: true,
-    },
+    '^.+\\.tsx?$': [
+      'ts-jest',
+      {
+        useESM: true,
+        isolatedModules: true,
+        diagnostics: {
+          exclude: ['!**/*.spec.ts'],
+        },
+      },
+    ],
   },
   moduleNameMapper: {
     // eslint-disable-next-line @typescript-eslint/naming-convention

@@ -62,3 +62,8 @@ export interface Options<Body, BodyAsString extends boolean> {
   orderBy?: OrderBy<Body>;
   bodyAsString?: BodyAsString;
 }
+
+export interface WaitForCallsFunction {
+  <Body>(request: RequestPattern, options?: Options<Body, false>): Promise<Call<Body>[]>;
+  (request: RequestPattern, options?: Options<string, true>): Promise<Call<string>[]>;
+}
