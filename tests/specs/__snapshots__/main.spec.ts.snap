@@ -5,10 +5,10 @@ exports[`tests createMapping returns mocked response as string on base64Body pat
 exports[`tests createMapping returns mocked response as string on string body pattern 1`] = `"some body once told me"`;
 
 exports[`tests waitForCalls returns bodyAsString 1`] = `
-Array [
-  Object {
+[
+  {
     "body": "yay",
-    "headers": Object {
+    "headers": {
       "Accept": "*/*",
       "Accept-Encoding": "gzip, deflate",
       "Accept-Language": "*",
@@ -21,25 +21,25 @@ Array [
     },
     "loggedDate": Any<Number>,
     "method": "POST",
-    "queryParams": Object {},
+    "queryParams": {},
     "url": "/someUrl",
   },
 ]
 `;
 
 exports[`tests waitForCalls returns calls information for different request method to the same url 1`] = `
-Array [
-  Object {
-    "body": Object {
-      "array": Array [
-        Object {
+[
+  {
+    "body": {
+      "array": [
+        {
           "field2": "value2",
         },
       ],
       "field1": "value1",
       "numberField": 1234,
     },
-    "headers": Object {
+    "headers": {
       "Accept": "*/*",
       "Accept-Encoding": "gzip, deflate",
       "Accept-Language": "*",
@@ -52,25 +52,25 @@ Array [
     },
     "loggedDate": Any<Number>,
     "method": "PUT",
-    "queryParams": Object {},
+    "queryParams": {},
     "url": "/someUrl",
   },
 ]
 `;
 
 exports[`tests waitForCalls returns calls information for different request method to the same url 2`] = `
-Array [
-  Object {
-    "body": Object {
-      "array": Array [
-        Object {
+[
+  {
+    "body": {
+      "array": [
+        {
           "field2": "value2",
         },
       ],
       "field1": "value1",
       "numberField": 1234,
     },
-    "headers": Object {
+    "headers": {
       "Accept": "*/*",
       "Accept-Encoding": "gzip, deflate",
       "Accept-Language": "*",
@@ -83,17 +83,17 @@ Array [
     },
     "loggedDate": Any<Number>,
     "method": "PUT",
-    "queryParams": Object {},
+    "queryParams": {},
     "url": "/someUrl",
   },
 ]
 `;
 
 exports[`tests waitForCalls returns calls information for get request 1`] = `
-Array [
-  Object {
+[
+  {
     "body": "",
-    "headers": Object {
+    "headers": {
       "Accept": "*/*",
       "Accept-Encoding": "gzip, deflate",
       "Accept-Language": "*",
@@ -104,10 +104,10 @@ Array [
     },
     "loggedDate": Any<Number>,
     "method": "GET",
-    "queryParams": Object {
-      "someQueryParam": Object {
+    "queryParams": {
+      "someQueryParam": {
         "key": "someQueryParam",
-        "values": Array [
+        "values": [
           "someValue",
         ],
       },
@@ -118,18 +118,18 @@ Array [
 `;
 
 exports[`tests waitForCalls returns calls information for post request 1`] = `
-Array [
-  Object {
-    "body": Object {
-      "array": Array [
-        Object {
+[
+  {
+    "body": {
+      "array": [
+        {
           "field2": "value2",
         },
       ],
       "field1": "value1",
       "numberField": 1234,
     },
-    "headers": Object {
+    "headers": {
       "Accept": "*/*",
       "Accept-Encoding": "gzip, deflate",
       "Accept-Language": "*",
@@ -142,20 +142,20 @@ Array [
     },
     "loggedDate": Any<Number>,
     "method": "POST",
-    "queryParams": Object {},
+    "queryParams": {},
     "url": "/someUrl",
   },
-  Object {
-    "body": Object {
-      "array": Array [
-        Object {
+  {
+    "body": {
+      "array": [
+        {
           "field2": "value2",
         },
       ],
       "field1": "value1",
       "numberField": 1234,
     },
-    "headers": Object {
+    "headers": {
       "Accept": "*/*",
       "Accept-Encoding": "gzip, deflate",
       "Accept-Language": "*",
@@ -168,25 +168,25 @@ Array [
     },
     "loggedDate": Any<Number>,
     "method": "POST",
-    "queryParams": Object {},
+    "queryParams": {},
     "url": "/someUrl",
   },
 ]
 `;
 
 exports[`tests waitForCalls returns ordered calls information 1`] = `
-Array [
-  Object {
-    "body": Object {
-      "array": Array [
-        Object {
+[
+  {
+    "body": {
+      "array": [
+        {
           "field2": "someValue",
         },
       ],
       "field1": "value1",
       "numberField": 1234,
     },
-    "headers": Object {
+    "headers": {
       "Accept": "*/*",
       "Accept-Encoding": "gzip, deflate",
       "Accept-Language": "*",
@@ -199,20 +199,20 @@ Array [
     },
     "loggedDate": Any<Number>,
     "method": "POST",
-    "queryParams": Object {},
+    "queryParams": {},
     "url": "/someUrl",
   },
-  Object {
-    "body": Object {
-      "array": Array [
-        Object {
+  {
+    "body": {
+      "array": [
+        {
           "field2": "someValue",
         },
       ],
       "field1": "value1",
       "numberField": 12345,
     },
-    "headers": Object {
+    "headers": {
       "Accept": "*/*",
       "Accept-Encoding": "gzip, deflate",
       "Accept-Language": "*",
@@ -225,7 +225,7 @@ Array [
     },
     "loggedDate": Any<Number>,
     "method": "POST",
-    "queryParams": Object {},
+    "queryParams": {},
     "url": "/someUrl",
   },
 ]
