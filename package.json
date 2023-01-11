@@ -1,6 +1,6 @@
 {
   "name": "@osskit/wiremock-client",
-  "version": "4.2.1",
+  "version": "4.3.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/osskit/wiremock-client.git"

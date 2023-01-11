@@ -145,10 +145,6 @@ Type: `Record<string, any>`
 
 Type: `Record<string, any>[]`
 
-###### priority?
-
-Type: `number`
-
 ##### response?
 
 Type: `Response`\
@@ -173,6 +169,10 @@ Type: `string`
 ###### base64Body?
 
 Type: `string`
+
+##### priority?
+
+Type: `number`
 
 ### waitForCalls(request, options?)
 
