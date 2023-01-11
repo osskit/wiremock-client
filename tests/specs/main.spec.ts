@@ -49,7 +49,14 @@ describe('tests', () => {
       const calls = await waitForCalls(request);
 
       expect(calls).toHaveLength(2);
-      expect(calls).toMatchSnapshot([{ loggedDate: expect.any(Number) }, { loggedDate: expect.any(Number) }]);
+      expect({ calls }).toMatchSnapshot({
+        calls: [
+          { loggedDate: expect.any(Number) },
+          {
+            loggedDate: expect.any(Number),
+          },
+        ],
+      });
     });
 
     it('returns calls information for get request', async () => {
@@ -62,7 +69,7 @@ describe('tests', () => {
       const calls = await waitForCalls(request);
 
       expect(calls).toHaveLength(1);
-      expect(calls).toMatchSnapshot([{ loggedDate: expect.any(Number) }]);
+      expect({ calls }).toMatchSnapshot({ calls: [{ loggedDate: expect.any(Number) }] });
     });
 
     it('returns calls information for different request method to the same url', async () => {
@@ -86,12 +93,12 @@ describe('tests', () => {
       const putCalls = await waitForCalls(putRequest);
 
       expect(putCalls).toHaveLength(1);
-      expect(putCalls).toMatchSnapshot([{ loggedDate: expect.any(Number) }]);
+      expect({ putCalls }).toMatchSnapshot({ putCalls: [{ loggedDate: expect.any(Number) }] });
 
       const postCalls = await waitForCalls(postRequest);
 
       expect(postCalls).toHaveLength(1);
-      expect(putCalls).toMatchSnapshot([{ loggedDate: expect.any(Number) }]);
+      expect({ putCalls }).toMatchSnapshot({ putCalls: [{ loggedDate: expect.any(Number) }] });
     });
 
     it('returns ordered calls information', async () => {
@@ -115,7 +122,14 @@ describe('tests', () => {
         orderBy: (a, b) => a.body.numberField - b.body.numberField,
       });
 
-      expect(calls).toMatchSnapshot([{ loggedDate: expect.any(Number) }, { loggedDate: expect.any(Number) }]);
+      expect({ calls }).toMatchSnapshot({
+        calls: [
+          { loggedDate: expect.any(Number) },
+          {
+            loggedDate: expect.any(Number),
+          },
+        ],
+      });
     });
 
     it('returns bodyAsString', async () => {
@@ -128,7 +142,7 @@ describe('tests', () => {
 
       const calls = await waitForCalls(request, { bodyAsString: true });
 
-      expect(calls).toMatchSnapshot([{ loggedDate: expect.any(Number) }]);
+      expect({ calls }).toMatchSnapshot({ calls: [{ loggedDate: expect.any(Number) }] });
     });
   });
 
@@ -146,7 +160,43 @@ describe('tests', () => {
         headers: { 'Content-Type': 'application/json' },
       });
 
-      expect(await response.text()).toMatchSnapshot();
+      await expect(response.text()).resolves.toMatchSnapshot();
+    });
+
+    it('returns mocked responses for prioritized request pattern', async () => {
+      await createMapping({
+        request: { urlPathPattern: '/someUrl', method: HttpMethod.Post },
+        response: { status: 200, body: 'lesser priority response' },
+        priority: 2,
+      });
+
+      await createMapping({
+        request: {
+          urlPathPattern: '/someUrl',
+          method: HttpMethod.Post,
+          headers: { someHeader: { equalTo: 'someHeaderValue' } },
+        },
+        response: { status: 200, body: 'higher priority response' },
+        priority: 1,
+      });
+
+      const response = await fetch('http://localhost:8080/someUrl', {
+        method: HttpMethod.Post,
+        body: JSON.stringify(body),
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      await expect(response.text()).resolves.toMatchSnapshot();
+
+      const prioritizedResponse = await fetch('http://localhost:8080/someUrl', {
+        method: HttpMethod.Post,
+        body: JSON.stringify(body),
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        headers: { 'Content-Type': 'application/json', someHeader: 'someHeaderValue' },
+      });
+
+      await expect(prioritizedResponse.text()).resolves.toMatchSnapshot();
     });
 
     it('returns mocked response as string on base64Body pattern', async () => {
@@ -162,7 +212,7 @@ describe('tests', () => {
         headers: { 'Content-Type': 'application/json' },
       });
 
-      expect(await response.text()).toMatchSnapshot();
+      await expect(response.text()).resolves.toMatchSnapshot();
     });
   });
 

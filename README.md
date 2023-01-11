@@ -170,6 +170,10 @@ Type: `string`
 
 Type: `string`
 
+##### priority?
+
+Type: `number`
+
 ### waitForCalls(request, options?)
 
 Return a `Promise` to the calls that was made with the given request pattern.

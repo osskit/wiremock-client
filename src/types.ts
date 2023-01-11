@@ -30,6 +30,7 @@ export interface Response {
 export interface Mapping {
   request: RequestPattern;
   response?: Response;
+  priority?: number;
 }
 
 export interface Call<Body> {
