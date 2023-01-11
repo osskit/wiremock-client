@@ -13,8 +13,8 @@ export class WireMockClient {
     await this.wireMock.global.resetAll();
   }
 
-  async createMapping({ request, response = { status: 200 } }: Mapping): Promise<RequestPattern> {
-    const stubMapping = await this.wireMock.mappings.createMapping({ request, response });
+  async createMapping({ request, response = { status: 200 }, priority }: Mapping): Promise<RequestPattern> {
+    const stubMapping = await this.wireMock.mappings.createMapping({ request, response, priority });
 
     if (!stubMapping.request) {
       throw new Error(`Failed to create mapping - ${JSON.stringify(stubMapping)}`);

@@ -145,6 +145,10 @@ Type: `Record<string, any>`
 
 Type: `Record<string, any>[]`
 
+###### priority?
+
+Type: `number`
+
 ##### response?
 
 Type: `Response`\

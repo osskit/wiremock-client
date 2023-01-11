@@ -4,229 +4,245 @@ exports[`tests createMapping returns mocked response as string on base64Body pat
 
 exports[`tests createMapping returns mocked response as string on string body pattern 1`] = `"some body once told me"`;
 
+exports[`tests createMapping returns mocked responses for prioritized request pattern 1`] = `"lesser priority response"`;
+
+exports[`tests createMapping returns mocked responses for prioritized request pattern 2`] = `"higher priority response"`;
+
 exports[`tests waitForCalls returns bodyAsString 1`] = `
-[
-  {
-    "body": "yay",
-    "headers": {
-      "Accept": "*/*",
-      "Accept-Encoding": "gzip, deflate",
-      "Accept-Language": "*",
-      "Connection": "keep-alive",
-      "Content-Length": "3",
-      "Content-Type": "text/plain;charset=UTF-8",
-      "Host": "localhost:8080",
-      "User-Agent": "undici",
-      "sec-fetch-mode": "cors",
+{
+  "calls": [
+    {
+      "body": "yay",
+      "headers": {
+        "Accept": "*/*",
+        "Accept-Encoding": "gzip, deflate",
+        "Accept-Language": "*",
+        "Connection": "keep-alive",
+        "Content-Length": "3",
+        "Content-Type": "text/plain;charset=UTF-8",
+        "Host": "localhost:8080",
+        "User-Agent": "undici",
+        "sec-fetch-mode": "cors",
+      },
+      "loggedDate": Any<Number>,
+      "method": "POST",
+      "queryParams": {},
+      "url": "/someUrl",
     },
-    "loggedDate": Any<Number>,
-    "method": "POST",
-    "queryParams": {},
-    "url": "/someUrl",
-  },
-]
+  ],
+}
 `;
 
 exports[`tests waitForCalls returns calls information for different request method to the same url 1`] = `
-[
-  {
-    "body": {
-      "array": [
-        {
-          "field2": "value2",
-        },
-      ],
-      "field1": "value1",
-      "numberField": 1234,
+{
+  "putCalls": [
+    {
+      "body": {
+        "array": [
+          {
+            "field2": "value2",
+          },
+        ],
+        "field1": "value1",
+        "numberField": 1234,
+      },
+      "headers": {
+        "Accept": "*/*",
+        "Accept-Encoding": "gzip, deflate",
+        "Accept-Language": "*",
+        "Connection": "keep-alive",
+        "Content-Length": "68",
+        "Content-Type": "application/json",
+        "Host": "localhost:8080",
+        "User-Agent": "undici",
+        "sec-fetch-mode": "cors",
+      },
+      "loggedDate": Any<Number>,
+      "method": "PUT",
+      "queryParams": {},
+      "url": "/someUrl",
     },
-    "headers": {
-      "Accept": "*/*",
-      "Accept-Encoding": "gzip, deflate",
-      "Accept-Language": "*",
-      "Connection": "keep-alive",
-      "Content-Length": "68",
-      "Content-Type": "application/json",
-      "Host": "localhost:8080",
-      "User-Agent": "undici",
-      "sec-fetch-mode": "cors",
-    },
-    "loggedDate": Any<Number>,
-    "method": "PUT",
-    "queryParams": {},
-    "url": "/someUrl",
-  },
-]
+  ],
+}
 `;
 
 exports[`tests waitForCalls returns calls information for different request method to the same url 2`] = `
-[
-  {
-    "body": {
-      "array": [
-        {
-          "field2": "value2",
-        },
-      ],
-      "field1": "value1",
-      "numberField": 1234,
+{
+  "putCalls": [
+    {
+      "body": {
+        "array": [
+          {
+            "field2": "value2",
+          },
+        ],
+        "field1": "value1",
+        "numberField": 1234,
+      },
+      "headers": {
+        "Accept": "*/*",
+        "Accept-Encoding": "gzip, deflate",
+        "Accept-Language": "*",
+        "Connection": "keep-alive",
+        "Content-Length": "68",
+        "Content-Type": "application/json",
+        "Host": "localhost:8080",
+        "User-Agent": "undici",
+        "sec-fetch-mode": "cors",
+      },
+      "loggedDate": Any<Number>,
+      "method": "PUT",
+      "queryParams": {},
+      "url": "/someUrl",
     },
-    "headers": {
-      "Accept": "*/*",
-      "Accept-Encoding": "gzip, deflate",
-      "Accept-Language": "*",
-      "Connection": "keep-alive",
-      "Content-Length": "68",
-      "Content-Type": "application/json",
-      "Host": "localhost:8080",
-      "User-Agent": "undici",
-      "sec-fetch-mode": "cors",
-    },
-    "loggedDate": Any<Number>,
-    "method": "PUT",
-    "queryParams": {},
-    "url": "/someUrl",
-  },
-]
+  ],
+}
 `;
 
 exports[`tests waitForCalls returns calls information for get request 1`] = `
-[
-  {
-    "body": "",
-    "headers": {
-      "Accept": "*/*",
-      "Accept-Encoding": "gzip, deflate",
-      "Accept-Language": "*",
-      "Connection": "keep-alive",
-      "Host": "localhost:8080",
-      "User-Agent": "undici",
-      "sec-fetch-mode": "cors",
-    },
-    "loggedDate": Any<Number>,
-    "method": "GET",
-    "queryParams": {
-      "someQueryParam": {
-        "key": "someQueryParam",
-        "values": [
-          "someValue",
-        ],
+{
+  "calls": [
+    {
+      "body": "",
+      "headers": {
+        "Accept": "*/*",
+        "Accept-Encoding": "gzip, deflate",
+        "Accept-Language": "*",
+        "Connection": "keep-alive",
+        "Host": "localhost:8080",
+        "User-Agent": "undici",
+        "sec-fetch-mode": "cors",
       },
+      "loggedDate": Any<Number>,
+      "method": "GET",
+      "queryParams": {
+        "someQueryParam": {
+          "key": "someQueryParam",
+          "values": [
+            "someValue",
+          ],
+        },
+      },
+      "url": "/someUrl?someQueryParam=someValue",
     },
-    "url": "/someUrl?someQueryParam=someValue",
-  },
-]
+  ],
+}
 `;
 
 exports[`tests waitForCalls returns calls information for post request 1`] = `
-[
-  {
-    "body": {
-      "array": [
-        {
-          "field2": "value2",
-        },
-      ],
-      "field1": "value1",
-      "numberField": 1234,
+{
+  "calls": [
+    {
+      "body": {
+        "array": [
+          {
+            "field2": "value2",
+          },
+        ],
+        "field1": "value1",
+        "numberField": 1234,
+      },
+      "headers": {
+        "Accept": "*/*",
+        "Accept-Encoding": "gzip, deflate",
+        "Accept-Language": "*",
+        "Connection": "keep-alive",
+        "Content-Length": "68",
+        "Content-Type": "application/json",
+        "Host": "localhost:8080",
+        "User-Agent": "undici",
+        "sec-fetch-mode": "cors",
+      },
+      "loggedDate": Any<Number>,
+      "method": "POST",
+      "queryParams": {},
+      "url": "/someUrl",
     },
-    "headers": {
-      "Accept": "*/*",
-      "Accept-Encoding": "gzip, deflate",
-      "Accept-Language": "*",
-      "Connection": "keep-alive",
-      "Content-Length": "68",
-      "Content-Type": "application/json",
-      "Host": "localhost:8080",
-      "User-Agent": "undici",
-      "sec-fetch-mode": "cors",
+    {
+      "body": {
+        "array": [
+          {
+            "field2": "value2",
+          },
+        ],
+        "field1": "value1",
+        "numberField": 1234,
+      },
+      "headers": {
+        "Accept": "*/*",
+        "Accept-Encoding": "gzip, deflate",
+        "Accept-Language": "*",
+        "Connection": "keep-alive",
+        "Content-Length": "68",
+        "Content-Type": "text/plain;charset=UTF-8",
+        "Host": "localhost:8080",
+        "User-Agent": "undici",
+        "sec-fetch-mode": "cors",
+      },
+      "loggedDate": Any<Number>,
+      "method": "POST",
+      "queryParams": {},
+      "url": "/someUrl",
     },
-    "loggedDate": Any<Number>,
-    "method": "POST",
-    "queryParams": {},
-    "url": "/someUrl",
-  },
-  {
-    "body": {
-      "array": [
-        {
-          "field2": "value2",
-        },
-      ],
-      "field1": "value1",
-      "numberField": 1234,
-    },
-    "headers": {
-      "Accept": "*/*",
-      "Accept-Encoding": "gzip, deflate",
-      "Accept-Language": "*",
-      "Connection": "keep-alive",
-      "Content-Length": "68",
-      "Content-Type": "text/plain;charset=UTF-8",
-      "Host": "localhost:8080",
-      "User-Agent": "undici",
-      "sec-fetch-mode": "cors",
-    },
-    "loggedDate": Any<Number>,
-    "method": "POST",
-    "queryParams": {},
-    "url": "/someUrl",
-  },
-]
+  ],
+}
 `;
 
 exports[`tests waitForCalls returns ordered calls information 1`] = `
-[
-  {
-    "body": {
-      "array": [
-        {
-          "field2": "someValue",
-        },
-      ],
-      "field1": "value1",
-      "numberField": 1234,
+{
+  "calls": [
+    {
+      "body": {
+        "array": [
+          {
+            "field2": "someValue",
+          },
+        ],
+        "field1": "value1",
+        "numberField": 1234,
+      },
+      "headers": {
+        "Accept": "*/*",
+        "Accept-Encoding": "gzip, deflate",
+        "Accept-Language": "*",
+        "Connection": "keep-alive",
+        "Content-Length": "71",
+        "Content-Type": "application/json",
+        "Host": "localhost:8080",
+        "User-Agent": "undici",
+        "sec-fetch-mode": "cors",
+      },
+      "loggedDate": Any<Number>,
+      "method": "POST",
+      "queryParams": {},
+      "url": "/someUrl",
     },
-    "headers": {
-      "Accept": "*/*",
-      "Accept-Encoding": "gzip, deflate",
-      "Accept-Language": "*",
-      "Connection": "keep-alive",
-      "Content-Length": "71",
-      "Content-Type": "application/json",
-      "Host": "localhost:8080",
-      "User-Agent": "undici",
-      "sec-fetch-mode": "cors",
+    {
+      "body": {
+        "array": [
+          {
+            "field2": "someValue",
+          },
+        ],
+        "field1": "value1",
+        "numberField": 12345,
+      },
+      "headers": {
+        "Accept": "*/*",
+        "Accept-Encoding": "gzip, deflate",
+        "Accept-Language": "*",
+        "Connection": "keep-alive",
+        "Content-Length": "72",
+        "Content-Type": "application/json",
+        "Host": "localhost:8080",
+        "User-Agent": "undici",
+        "sec-fetch-mode": "cors",
+      },
+      "loggedDate": Any<Number>,
+      "method": "POST",
+      "queryParams": {},
+      "url": "/someUrl",
     },
-    "loggedDate": Any<Number>,
-    "method": "POST",
-    "queryParams": {},
-    "url": "/someUrl",
-  },
-  {
-    "body": {
-      "array": [
-        {
-          "field2": "someValue",
-        },
-      ],
-      "field1": "value1",
-      "numberField": 12345,
-    },
-    "headers": {
-      "Accept": "*/*",
-      "Accept-Encoding": "gzip, deflate",
-      "Accept-Language": "*",
-      "Connection": "keep-alive",
-      "Content-Length": "72",
-      "Content-Type": "application/json",
-      "Host": "localhost:8080",
-      "User-Agent": "undici",
-      "sec-fetch-mode": "cors",
-    },
-    "loggedDate": Any<Number>,
-    "method": "POST",
-    "queryParams": {},
-    "url": "/someUrl",
-  },
-]
+  ],
+}
 `;
