@@ -19,13 +19,19 @@ export interface RequestPattern {
   headers?: Record<string, any>;
 }
 
-export interface Response {
+interface SuccessResponse {
   status: number;
   jsonBody?: Record<string, any>;
   headers?: Record<string, any>;
   body?: string;
   base64Body?: string;
 }
+
+interface FailureResponse {
+  fault: 'CONNECTION_RESET_BY_PEER' | 'EMPTY_RESPONSE' | 'MALFORMED_RESPONSE_CHUNK' | 'RANDOM_DATA_THEN_CLOSE';
+}
+
+export type Response = FailureResponse | SuccessResponse;
 
 export interface Mapping {
   request: RequestPattern;
