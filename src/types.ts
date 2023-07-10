@@ -23,6 +23,7 @@ interface SuccessResponse {
   status: number;
   jsonBody?: Record<string, any>;
   headers?: Record<string, any>;
+  transformers?: string[];
   body?: string;
   base64Body?: string;
 }

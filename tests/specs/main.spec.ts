@@ -163,6 +163,22 @@ describe('tests', () => {
       await expect(response.text()).resolves.toMatchSnapshot();
     });
 
+    it('returns mocked random transformed response', async () => {
+      await createMapping({
+        request: { urlPathPattern: '/someUrl', method: HttpMethod.Post },
+        response: { status: 200, body: '{{randomValue length=33 type=\'ALPHANUMERIC\'}}', transformers: ['response-template'] },
+      });
+
+      const response = await fetch('http://localhost:8080/someUrl', {
+        method: HttpMethod.Post,
+        body: JSON.stringify(body),
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      await expect(response.text()).resolves.toHaveLength(33);
+    });
+
     it('returns mocked responses for prioritized request pattern', async () => {
       await createMapping({
         request: { urlPathPattern: '/someUrl', method: HttpMethod.Post },
