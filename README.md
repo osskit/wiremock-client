@@ -189,6 +189,7 @@ await createMapping({
 });
 ```
 
+To use this feature, make sure to start the wiremock docker with the `--local-response-templating` option.
 For more on templates see [wiremock docs](http://wiremock.org/docs/response-templating/)
 
 ###### base64Body?
