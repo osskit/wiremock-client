@@ -5,9 +5,14 @@ services:
     image: wiremock/wiremock
     ports:
       - 8080:8080
-    command: '--verbose --local-response-templating'
+    command: '--verbose'
   mocks2:
     image: wiremock/wiremock
     ports:
       - 9090:8080
+    command: '--verbose'
+  mocks3:
+    image: wiremock/wiremock
+    ports:
+      - 7070:8080
     command: '--verbose --local-response-templating'

@@ -180,6 +180,17 @@ Type: `Record<string, any>`
 
 Type: `string`
 
+Body can be a template used to generate random responses, for example:
+
+```ts
+await createMapping({
+  request: { urlPathPattern: '/someUrl', method: HttpMethod.Post },
+  response: { status: 200, body: "{{randomValue length=33 type='ALPHANUMERIC'}}", transformers: ['response-template'] },
+});
+```
+
+For more on templates see [wiremock docs](http://wiremock.org/docs/response-templating/)
+
 ###### base64Body?
 
 Type: `string`

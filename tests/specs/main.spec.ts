@@ -164,12 +164,13 @@ describe('tests', () => {
     });
 
     it('returns mocked random transformed response', async () => {
+      setGlobalConfiguration({ baseUrl: 'http://localhost:7070' });
       await createMapping({
         request: { urlPathPattern: '/someUrl', method: HttpMethod.Post },
-        response: { status: 200, body: '{{randomValue length=33 type=\'ALPHANUMERIC\'}}', transformers: ['response-template'] },
+        response: { status: 200, body: "{{randomValue length=33 type='ALPHANUMERIC'}}", transformers: ['response-template'] },
       });
 
-      const response = await fetch('http://localhost:8080/someUrl', {
+      const response = await fetch('http://localhost:7070/someUrl', {
         method: HttpMethod.Post,
         body: JSON.stringify(body),
         // eslint-disable-next-line @typescript-eslint/naming-convention
