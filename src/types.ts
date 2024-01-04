@@ -38,6 +38,9 @@ export interface Mapping {
   request: RequestPattern;
   response?: Response;
   priority?: number;
+  scenarioName?: string;
+  requiredScenarioState?: string;
+  targetScenarioState?: string;
 }
 
 export interface Call<Body> {
