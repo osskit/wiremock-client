@@ -51,9 +51,19 @@ describe('tests', () => {
       expect(calls).toHaveLength(2);
       expect({ calls }).toMatchSnapshot({
         calls: [
-          { loggedDate: expect.any(Number) },
           {
             loggedDate: expect.any(Number),
+            headers: {
+              // eslint-disable-next-line @typescript-eslint/naming-convention
+              'User-Agent': expect.any(String),
+            },
+          },
+          {
+            loggedDate: expect.any(Number),
+            headers: {
+              // eslint-disable-next-line @typescript-eslint/naming-convention
+              'User-Agent': expect.any(String),
+            },
           },
         ],
       });
@@ -69,7 +79,17 @@ describe('tests', () => {
       const calls = await waitForCalls(request);
 
       expect(calls).toHaveLength(1);
-      expect({ calls }).toMatchSnapshot({ calls: [{ loggedDate: expect.any(Number) }] });
+      expect({ calls }).toMatchSnapshot({
+        calls: [
+          {
+            loggedDate: expect.any(Number),
+            headers: {
+              // eslint-disable-next-line @typescript-eslint/naming-convention
+              'User-Agent': expect.any(String),
+            },
+          },
+        ],
+      });
     });
 
     it('returns calls information for different request method to the same url', async () => {
@@ -93,12 +113,32 @@ describe('tests', () => {
       const putCalls = await waitForCalls(putRequest);
 
       expect(putCalls).toHaveLength(1);
-      expect({ putCalls }).toMatchSnapshot({ putCalls: [{ loggedDate: expect.any(Number) }] });
+      expect({ putCalls }).toMatchSnapshot({
+        putCalls: [
+          {
+            loggedDate: expect.any(Number),
+            headers: {
+              // eslint-disable-next-line @typescript-eslint/naming-convention
+              'User-Agent': expect.any(String),
+            },
+          },
+        ],
+      });
 
       const postCalls = await waitForCalls(postRequest);
 
       expect(postCalls).toHaveLength(1);
-      expect({ putCalls }).toMatchSnapshot({ putCalls: [{ loggedDate: expect.any(Number) }] });
+      expect({ putCalls }).toMatchSnapshot({
+        putCalls: [
+          {
+            loggedDate: expect.any(Number),
+            headers: {
+              // eslint-disable-next-line @typescript-eslint/naming-convention
+              'User-Agent': expect.any(String),
+            },
+          },
+        ],
+      });
     });
 
     it('returns ordered calls information', async () => {
@@ -124,9 +164,19 @@ describe('tests', () => {
 
       expect({ calls }).toMatchSnapshot({
         calls: [
-          { loggedDate: expect.any(Number) },
           {
             loggedDate: expect.any(Number),
+            headers: {
+              // eslint-disable-next-line @typescript-eslint/naming-convention
+              'User-Agent': expect.any(String),
+            },
+          },
+          {
+            loggedDate: expect.any(Number),
+            headers: {
+              // eslint-disable-next-line @typescript-eslint/naming-convention
+              'User-Agent': expect.any(String),
+            },
           },
         ],
       });
@@ -142,7 +192,17 @@ describe('tests', () => {
 
       const calls = await waitForCalls(request, { bodyAsString: true });
 
-      expect({ calls }).toMatchSnapshot({ calls: [{ loggedDate: expect.any(Number) }] });
+      expect({ calls }).toMatchSnapshot({
+        calls: [
+          {
+            loggedDate: expect.any(Number),
+            headers: {
+              // eslint-disable-next-line @typescript-eslint/naming-convention
+              'User-Agent': expect.any(String),
+            },
+          },
+        ],
+      });
     });
   });
 
