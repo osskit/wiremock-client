@@ -24,8 +24,8 @@
     "prepare": "husky install",
     "test": "yarn test:teardown && yarn test:setup && yarn test:start && yarn test:teardown",
     "test:start": "NODE_OPTIONS=--experimental-vm-modules jest --config tests/jest.config.ts",
-    "test:teardown": "cd tests && docker-compose down --remove-orphans",
-    "test:setup": "yarn build && cd tests && docker-compose pull && docker-compose build && docker-compose up -d"
+    "test:teardown": "cd tests && docker compose down --remove-orphans",
+    "test:setup": "yarn build && cd tests && docker compose pull && docker compose build && docker compose up -d"
   },
   "engines": {
     "node": ">=18.0.0"
